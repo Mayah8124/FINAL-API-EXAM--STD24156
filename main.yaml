@@ -14,4 +14,25 @@ paths:
             example: Ok
 
 components:
+  Characteristic:
+    type: object
+    properties:
+      ram_memories:
+        type: integer
+      rom_memory:
+        type: integer
+
+  Phone:
+    type: object
+    properties:
+      id:
+        type: string
+      brand:
+        type: string
+      model:
+        type: string
+      characteristics:
+        allOf:
+          - $ref: "#/components/Characteristic"
+
 
