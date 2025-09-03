@@ -46,3 +46,11 @@ def get_phone(id: str):
         if phone.id == id:
             return JSONResponse(status_code=200, content=phone.dict(), media_type="application/json")
     return Response(status_code=404, content= "phone not found", media_type="text/plain")
+
+@app.put("/phones/{id}/characteristic")
+def update_characteristic(id: str, characteristic: Characteristic):
+    for phone in phone_list:
+        if phone.id == id:
+            phone.characteristic = characteristic
+            return JSONResponse(status_code=200, content=phone.dict(), media_type="application/json")
+    return Response(status_code=404, content= "phone not found", media_type="text/plain")
