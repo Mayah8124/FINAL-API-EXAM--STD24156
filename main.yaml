@@ -1,0 +1,17 @@
+title: STD24156
+info:
+  server: http://localhost:8000
+  version: 1.0.0
+  description: This is a specification of STD24156
+
+paths:
+  /health:
+    get:
+      response:
+        content:
+          text/plain:
+            type: str
+            example: Ok
+
+components:
+
