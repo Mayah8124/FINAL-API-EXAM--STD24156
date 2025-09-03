@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from pyexpat.errors import messages
 from starlette.responses import Response, JSONResponse
 
 app = FastAPI()
@@ -36,5 +37,12 @@ def get_phones(phone: Phone):
     return JSONResponse(status_code=200, content=serialized_phone(), media_type="application/json")
 
 @app.get("/phones")
-def get_phone_list(Phone: Phone):
+def get_phone_list(phone: Phone):
     return JSONResponse(status_code=201, content=phone_list , media_type="application/json")
+
+@app.get("/phones/{id}")
+def get_phone(id: str):
+    for phone in phone_list:
+        if phone.id == id:
+            return JSONResponse(status_code=200, content=phone.dict(), media_type="application/json")
+    return Response(status_code=404, content= "phone not found", media_type="text/plain")
