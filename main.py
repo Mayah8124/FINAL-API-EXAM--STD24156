@@ -32,3 +32,6 @@ def serialized_phone(phone: Phone):
 def get_phones(phone: Phone):
     return JSONResponse(status_code=200, content=serialized_phone(phone), media_type="application/json")
 
+@app.get("/phones")
+def get_phone_list(Phone: Phone):
+    return JSONResponse(status_code=201, content=phone_list , media_type="application/json")
