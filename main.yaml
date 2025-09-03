@@ -7,11 +7,30 @@ info:
 paths:
   /health:
     get:
-      response:
+        response:
+          200:
+            content:
+              text/plain:
+                type: str
+                example: Ok
+
+  /phones:
+    post:
+      requestBody:
         content:
-          text/plain:
-            type: str
-            example: Ok
+          phone_list:
+            schema:
+              type: array
+              items:
+                - $ref: "#/components/Phone"
+      response:
+        200:
+          content:
+            application/json:
+              schema:
+              type: object
+              items:
+                - $ref: "#/components/Phone"
 
 components:
   Characteristic:
