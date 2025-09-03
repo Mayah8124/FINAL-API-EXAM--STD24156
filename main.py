@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from starlette.responses import Response
+from pydantic import BaseModel
+from starlette.responses import Response, JSONResponse
 
 app = FastAPI()
 
@@ -10,4 +11,24 @@ def get_pong():
 @app.get("/health")
 def get_health():
     return Response("Ok" , media_type= "text/plain" , status_code=200)
+
+class Characteristic(BaseModel):
+    ram_memory: int
+    rom_memory: int
+
+class Phone(BaseModel):
+    id: str
+    brand: str
+    model: str
+    characteristic: Characteristic
+
+phone_list = [Phone]
+
+def serialized_phone(phone: Phone):
+    serialized_phone().append(phone)
+    return serialized_phone()
+
+@app.post("/phones")
+def get_phones(phone: Phone):
+    return JSONResponse(status_code=200, content=serialized_phone(phone), media_type="application/json")
 
